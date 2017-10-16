@@ -1,7 +1,7 @@
 # Terraform Easy Website
-Very simple-to-use way to setup a static website on AWS S3, with a CloudFront CDN and with HTTPS using AWS Certificate Manager
 
 * Websites are configured with HTTPS by default
+* Works with latest terraform
 
 # Prerequisites
 * Install 
@@ -10,6 +10,7 @@ Very simple-to-use way to setup a static website on AWS S3, with a CloudFront CD
   * [jq](https://stedolan.github.io/jq/)
 
 * [Configure](#aws-provider-authentication) AWS credentials
+* Delete example [terraform.tfstate](terraform.tfstate) ( `rm terraform.tfstate` )
 * [Create ACM certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request.html) for the domains you want to use in us-east-1 region and note their IDs 
   *  e.g., `aws acm request-certificate --region us-east-1 --domain-name "*.astarcrm.com" --subject-alternative-names "*.astarcrm.in" --idempotency-token random`
   
