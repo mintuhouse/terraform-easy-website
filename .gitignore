@@ -1,0 +1,22 @@
+## Compiled files
+#*.tfstate
+#*.tfstate.*.backup
+#*.tfstate.backup
+
+# Module directory
+.terraform/
+
+## Variable values for development
+#terraform.tfvars
+
+## Terraform plan output files
+*.tfout
+
+# Cache objects
+packer_cache/
+
+# For built boxes
+*.box
+
+# Environment Secrets
+.envrc
