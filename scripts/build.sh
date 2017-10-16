@@ -21,8 +21,8 @@ if ! [[ "$zone_id" -eq "null" ]]; then
   terraform import aws_route53_zone.website $zone_id
 fi
 
-terraform plan -out prepare.tfout -var="subdomain=${SUBDOMAIN}" -var-file="${CONFIG_FILE}"
+terraform plan -out main.tfout -var="subdomain=${SUBDOMAIN}" -var-file="${CONFIG_FILE}"
 
-terraform apply prepare.tfout 
+terraform apply main.tfout 
 
 cd -
