@@ -4,7 +4,7 @@ provider "aws" {
 
 # Bucket for sending logs
 resource "aws_s3_bucket" "log_bucket" {
-  bucket = "${var.s3_terraform_log_bucket_name}"
+  bucket_prefix = "${var.s3_terraform_log_bucket_prefix}"
   acl = "log-delivery-write"
 }
 

@@ -1,7 +1,7 @@
-variable "s3_terraform_log_bucket_name" {
+variable "s3_terraform_log_bucket_prefix" {
   type = "string"
   description = "Bucket name for storing terraform logs"
-  default = "terraform-log-bucket"
+  default = "terraform-logs-"
 }
 
 variable "s3_remote_state_bucket_prefix" {
