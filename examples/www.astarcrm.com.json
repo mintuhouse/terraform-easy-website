@@ -1,4 +1,5 @@
 {
   "subdomain": "www.astarcrm.com",
-  "domain": "astarcrm.com"
+  "domain": "astarcrm.com",
+  "acm_certificate_arn": "arn:aws:acm:us-east-1:352367965336:certificate/bb324c8f-6652-4610-bebc-6bee0b6837c4"
 }

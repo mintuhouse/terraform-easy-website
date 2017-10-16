@@ -8,3 +8,9 @@ variable "domain" {
   type = "string"
   description = "Domain for Route53 Zonefile. Prepopulate via import command if already exists"
 }
+
+variable "route53_zone_id" {
+  type = "string"
+  description = "Route53 Zone ID of the domain"
+  default = ""
+}

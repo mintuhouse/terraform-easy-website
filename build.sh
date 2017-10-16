@@ -18,11 +18,13 @@ terraform init -backend-config="path=$STATE_PATH"
 
 # Import the zone file if it already exists
 zone_id=$(aws route53 list-hosted-zones-by-name  --dns-name "${DOMAIN}" --max-items 1 | jq ".HostedZones[0].Id" | tr -d '"' | rev | cut -d'/' -f1 | rev)
-if ! [[ "$zone_id" -eq "null" ]]; then
+if [[ "$zone_id" -eq "null" ]]; then
+  unset zone_id
+else
   terraform import aws_route53_zone.website $zone_id
 fi
 
-terraform plan -out main.tfout -var-file="${CONFIG_FILE}"
+terraform plan -out main.tfout -var-file="${CONFIG_FILE}" -var="route53_zone_id=${zone_id}"
 
 terraform apply main.tfout 
 
