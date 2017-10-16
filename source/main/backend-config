@@ -1,2 +1,0 @@
-bucket = "terraform-state-20171016100704155300000002"
-dynamodb_table = "terraform-state-lock"

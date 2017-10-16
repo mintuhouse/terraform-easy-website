@@ -10,12 +10,6 @@ Very simple-to-use way to setup a static website on AWS S3, with a CloudFront CD
   * [jq](https://stedolan.github.io/jq/)
 
 * [Configure](#aws-provider-authentication) AWS credentials
-* Delete the following configuration files (will be regenerated according to your setup)
-  * [source/main/backend-config](source/main/backend-config)
-  * [source/prepare/terraform.tfstate](source/prepare/terraform.tfstate)
-* Prepare [backend-config](source/main/backend-config)
-  * Run `./script/prepare.sh` to create the necessary s3 bucket and dynamodb table for lock
-    * Alternatively, you may manually update values of [backend-config](source/main/backend-config)
 * [Create ACM certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request.html) for the domains you want to use in us-east-1 region and note their IDs 
   *  e.g., `aws acm request-certificate --region us-east-1 --domain-name "*.astarcrm.com" --subject-alternative-names "*.astarcrm.in" --idempotency-token random`
   

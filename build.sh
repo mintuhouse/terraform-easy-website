@@ -6,13 +6,13 @@ command -v jq >/dev/null 2>&1 || { echo >&2 "jq is required, but not found.  Abo
 
 # Check if required ENV variables are passed
 : ${SUBDOMAIN?"Need to set ENV variable SUBDOMAIN"} # Exit if SUBDOMAIN is not defined
-default_config_file="../../examples/${SUBDOMAIN}.tfvars"
+default_config_file="./examples/${SUBDOMAIN}.tfvars"
 CONFIG_FILE="${CONFIG_FILE:-$default_config_file}"
 
-main_path="$(dirname "$0")/../source/main"
+main_path="$(dirname "$0")"
 cd $main_path
 
-terraform init -backend-config=backend-config -backend-config="key=${SUBDOMAIN}"
+terraform init
 
 DOMAIN=$(sed -n 's/^domain=//p' $CONFIG_FILE | tr -d '"')
 # Import the zone file if it already exists
