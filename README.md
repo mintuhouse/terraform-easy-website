@@ -10,7 +10,7 @@
   * [jq](https://stedolan.github.io/jq/)
 
 * [Configure](#aws-provider-authentication) AWS credentials
-* Delete example [terraform.tfstate](terraform.tfstate) ( `rm terraform.tfstate` )
+* Delete example [tfstate](tfstate) files ( `rm tfstate/*.tfstate` )
 * [Create ACM certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request.html) for the domains you want to use in us-east-1 region and note their IDs 
   *  e.g., `aws acm request-certificate --region us-east-1 --domain-name "*.astarcrm.com" --subject-alternative-names "*.astarcrm.in" --idempotency-token random`
   
@@ -24,7 +24,8 @@
       e.g., `arn:aws:acm:us-east-1:352457905336:certificate/bb324c8f-6652-4610-aebc-6baa0b6817c4`
 
 # Usage
-*
+* Create a .json CONFIG_FILE for your subdomain (see [examples](examples) folder for reference)
+* e.g. `CONFIG_FILE=./examples/www.astarcrm.com.json ./build.sh`
 
 # AWS provider authentication
 [Configure](https://www.terraform.io/docs/providers/aws/#authentication) via environment variables
