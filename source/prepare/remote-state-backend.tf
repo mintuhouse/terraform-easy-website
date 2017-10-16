@@ -38,10 +38,10 @@ resource "aws_dynamodb_table" "terraform-state-lock" {
   }
 }
 
-output "bucket-name" {
+output "bucket" {
   value = "${aws_s3_bucket.remote-state.id}"
 }
 
-output "dynamodb-name" {
+output "dynamodb_table" {
   value = "${aws_dynamodb_table.terraform-state-lock.name}"
 }
