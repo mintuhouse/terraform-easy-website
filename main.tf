@@ -10,7 +10,7 @@ provider "aws" {
 }
 
 locals {
-  create_a_new_route53_zone = "${var.route53_zone_id == "" ? "true" : "false"}"
+  create_a_new_route53_zone = "${((var.create_a_new_route53_zone == "true") && (var.route53_zone_id == "")) ? "true" : "false"}"
 }
 
 # Create a new Route53 Zone if var.route53_zone_id is not passed
@@ -24,6 +24,6 @@ locals {
   route53_zone_id = "${local.create_a_new_route53_zone == "true" ? module.aws-dns.route53_zone_id : var.route53_zone_id}"
 }
 
-module "aws-website" {
-  source = "./aws-website"
-}
+# module "aws-website" {
+#   source = "./aws-website"
+# }

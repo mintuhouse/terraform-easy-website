@@ -7,6 +7,11 @@ variable "domain" {
   description = "Domain for Route53 Zonefile."
 }
 
+variable "create_a_new_route53_zone" {
+  description = "Whether ('true'/ 'false') to create a new Route53 Zonefile if it already exists"
+  default = "true"
+}
+
 variable "route53_zone_id" {
   description = "Route53 Zone ID of the domain. If not provided, will create a Route53 zone"
   default = ""
