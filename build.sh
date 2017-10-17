@@ -21,11 +21,24 @@ zone_id=$(aws route53 list-hosted-zones-by-name  --dns-name "${DOMAIN}" --max-it
 if [[ "$zone_id" -eq "null" ]]; then
   unset zone_id
 else
-  terraform import aws_route53_zone.website $zone_id
+  terraform import module.aws-dns.aws_route53_zone.website $zone_id
 fi
 
-terraform plan -out main.tfout -var-file="${CONFIG_FILE}" -var="route53_zone_id=${zone_id}"
+terraform plan -out main.tfout -var-file="${CONFIG_FILE}" -var="route53_zone_id=${zone_id}" -detailed-exitcode
+return_code=$?
 
-terraform apply main.tfout 
+if [[ $return_code != 0 ]]
+then
+  read -r -p "Are you sure you want to make above changes? [y/N] " response
+  response=${response,,}    # tolower
+  if [[ "$response" =~ ^(yes|y)$ ]]
+  then
+    terraform apply main.tfout 
+  else
+    echo "Exiting...!"
+  fi 
+fi
 
-cd -
+# Cleanup
+rm main.tfout
+cd $OLDPWD
