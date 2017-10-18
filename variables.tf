@@ -32,7 +32,7 @@ variable "index_document" {
 }
 
 variable "target" {
-  description = "target subdomain to which current subdomain has to be redirected (https by default)"
+  description = "Target subdomain (https by default) to which current subdomain has to be redirected"
   default = ""
 }
 

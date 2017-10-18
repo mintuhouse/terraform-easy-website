@@ -16,12 +16,22 @@ STATE_PATH="tfstate/${SUBDOMAIN}.tfstate"
 
 terraform init -backend-config="path=$STATE_PATH"
 
+state_output=$(terraform state show module.aws-dns.aws_route53_zone.website)
+state_domain=$(echo "$state_output" | grep "name\s*=" | sed 's/name.*=\s*\(.*\)/\1/')
+state_zone_id=$(echo "$state_output" | grep "zone_id\s*=" | sed 's/zone_id.*=\s*\(.*\)/\1/')
+
 # Import the zone file if it already exists
 zone_id=$(aws route53 list-hosted-zones-by-name  --dns-name "${DOMAIN}" --max-items 1 | jq ".HostedZones[0].Id" | tr -d '"' | rev | cut -d'/' -f1 | rev)
-if [[ "$zone_id" -eq "null" ]]; then
+if [[ "$zone_id" == "null" ]]; then
   unset zone_id
-else
+elif [[ "$state_domain" == "" ]]; then # No state file found
+  echo "Nothing to worry! We'll now create a new state file."
   terraform import module.aws-dns.aws_route53_zone.website $zone_id
+elif [[ "$state_domain" != "$DOMAIN" ]] || [[ "$state_zone_id" != "$zone_id" ]]; then
+  echo "Domain and Current Zone ID in state file doesn't match with remote"
+  exit
+#else 
+  # Nothing to do
 fi
 
 terraform plan -out main.tfout -var-file="${CONFIG_FILE}" -var="route53_zone_id=${zone_id}" -detailed-exitcode
@@ -40,5 +50,5 @@ then
 fi
 
 # Cleanup
-rm main.tfout
+rm -f main.tfout
 cd $OLDPWD

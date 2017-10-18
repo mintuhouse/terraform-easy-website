@@ -3,12 +3,9 @@
 * Websites are configured with HTTPS by default
 * Works with latest terraform
 
-# Prerequisites
+# Prerequisites (for TF modules)
 * Install 
   * [Terraform(>= 0.8.0)](https://www.terraform.io/intro/getting-started/install.html)
-  * [awscli](https://aws.amazon.com/cli/)
-  * [jq](https://stedolan.github.io/jq/)
-
 * [Configure](#aws-provider-authentication) AWS credentials
 * Delete example [tfstate](tfstate) files ( `rm tfstate/*.tfstate` )
 * [Create ACM certificates](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request.html) for the domains you want to use in us-east-1 region and note their IDs 
@@ -22,6 +19,11 @@
   * Note the ARN in Details section of the certificate 
   
       e.g., `arn:aws:acm:us-east-1:352457905336:certificate/bb324c8f-6652-4610-aebc-6baa0b6817c4`
+
+# Prerequisites (for build.sh)
+* Install
+  * [awscli](https://aws.amazon.com/cli/)
+  * [jq](https://stedolan.github.io/jq/)
 
 # Usage
 * Create a .json CONFIG_FILE for your subdomain (see [examples](examples) folder for reference)
